@@ -1,14 +1,23 @@
-
-
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ toggleSidebar }) => {
   const [open, setOpen] = useState(false);
+  
+  const [profileLetter, setProfileLetter] = useState("D");
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  // Close dropdown when clicking outside
+  // 🔹 Get logged-in user first letter
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user.username) {
+      setProfileLetter(user.username.charAt(0).toUpperCase());
+    }
+  }, []);
+
+  // 🔹 Close dropdown when clicking outside
   useEffect(() => {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -21,6 +30,7 @@ const Navbar = ({ toggleSidebar }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/");
   };
 
@@ -61,7 +71,7 @@ const Navbar = ({ toggleSidebar }) => {
           onClick={() => setOpen(!open)}
           className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold cursor-pointer select-none"
         >
-          D
+          {profileLetter}
         </div>
 
         {/* Dropdown */}
@@ -97,5 +107,3 @@ const Navbar = ({ toggleSidebar }) => {
 };
 
 export default Navbar;
-
-

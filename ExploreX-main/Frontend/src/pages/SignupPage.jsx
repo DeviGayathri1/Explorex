@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Logo.svg";
 
 const SignupPage = () => {
-  const navigate = useNavigate(); // ✅ added
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -11,13 +11,18 @@ const SignupPage = () => {
     password: "",
     confirmPassword: "",
   });
+
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // frontend validation
     if (
       !formData.username ||
       !formData.email ||
@@ -33,11 +38,39 @@ const SignupPage = () => {
       return;
     }
 
-    setError("");
-    console.log("Signup Attempt:", formData);
+    try {
+      setLoading(true);
+      setError("");
 
-    // ✅ navigate to home
-    navigate("/home");
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Signup failed");
+        return;
+      }
+
+      console.log("Signup Success:", data);
+
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
+      // navigate on success
+      navigate("/home");
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError("Server error. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,7 +86,9 @@ const SignupPage = () => {
         <div className="z-10 relative">
           <div className="flex flex-col items-start gap-4 mb-4">
             <img src={logo} alt="ExploreX Logo" className="w-20 h-20 object-contain" />
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight">ExploreX</h1>
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
+              ExploreX
+            </h1>
           </div>
 
           <p className="text-lg md:text-xl font-medium mb-2 opacity-90">
@@ -138,9 +173,10 @@ const SignupPage = () => {
 
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
             >
-              Sign Up
+              {loading ? "Creating account..." : "Sign Up"}
             </button>
 
             <p className="text-sm text-center text-gray-600">
