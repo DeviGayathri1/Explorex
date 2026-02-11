@@ -32,7 +32,10 @@ const HomePage = () => {
       <div className="relative z-10">
 
         {/* Sidebar */}
-        <Sidebar isOpen={sidebarOpen} />
+        <Sidebar
+  isOpen={sidebarOpen}
+  onClose={() => setSidebarOpen(false)}
+/>
 
         {/* Overlay */}
         {sidebarOpen && (

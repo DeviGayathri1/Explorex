@@ -1,95 +1,128 @@
-import { useEffect, useState } from "react";
+import React from "react";
 
-const ProfilePage = () => {
-  const [user, setUser] = useState(null);
+/* ------------------ Dummy Data ------------------ */
+const user = {
+name: "Devi Gayathri",
+tagline: "Nature-First Explorer 🌿",
+countries: 8,
+cities: 21,
+trips: 15,
+aiUsed: 43,
+};
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
-  }, []);
+const trips = [
+{ place: "Ooty", date: "Jan 2026", status: "Completed" },
+{ place: "Kerala", date: "Feb 2026", status: "Completed" },
+{ place: "Manali", date: "Mar 2026", status: "Planned" },
+];
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">Loading profile...</p>
-      </div>
-    );
-  }
+const travelDNA = [
+{ label: "Nature", value: 80 },
+ { label: "Food", value: 60 },
+{ label: "Culture", value: 50 },
+{ label: "Adventure", value: 40 },
+];
 
+ /* ------------------ Components ------------------ */
+
+function ProfileHeader() {
+return (
+<div className="bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-xl p-6 flex items-center gap-6">
+<div className="w-20 h-20 bg-white text-blue-600 rounded-full flex items-center justify-center text-3xl font-bold">
+DG
+</div>
+<div>
+<h1 className="text-2xl font-bold">{user.name}</h1>
+<p className="opacity-90">{user.tagline}</p>
+</div>
+</div>
+);
+}
+
+function StatCard({ title, value }) {
+return (
+<div className="bg-white rounded-lg shadow p-4 text-center">
+      <h2 className="text-gray-500 text-sm">{title}</h2>
+     <p className="text-2xl font-bold text-blue-600">{value}</p>
+    </div>
+  );
+}
+
+ function TravelStats() {
   return (
-    <div className="min-h-screen bg-gray-100">
+   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <StatCard title="Countries" value={user.countries} />
+      <StatCard title="Cities" value={user.cities} />
+      <StatCard title="Trips Planned" value={user.trips} />
+      <StatCard title="AI Used" value={user.aiUsed} />
+    </div>
+  );
+}
 
-      {/* 🌄 HERO IMAGE */}
-      <div
-        className="relative w-full h-[300px] bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://png.pngtree.com/thumb_back/fh260/background/20210207/pngtree-simple-gradient-on-gray-background-image_557021.jpg')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/10"></div>
-      </div>
+ function TripTimeline() {
+   return (
+     <div className="bg-white rounded-xl shadow p-6">
+       <h2 className="text-xl font-semibold mb-4">Your Trips</h2>
+       <ul className="space-y-3">
+         {trips.map((trip, index) => (
+           <li
+             key={index}
+             className="flex justify-between items-center border-b pb-2"
+           >
+             <div>
+               <p className="font-medium">{trip.place}</p>
+               <span className="text-sm text-gray-500">{trip.date}</span>
+             </div>
+             <span
+               className={`text-sm px-3 py-1 rounded-full ${
+                 trip.status === "Completed"
+                   ? "bg-green-100 text-green-700"
+                   : "bg-yellow-100 text-yellow-700"
+               }`}
+             >
+               {trip.status}
+             </span>
+           </li>
+         ))}
+      </ul>
+     </div>
+   );
+ }
 
-      {/* 👤 PROFILE OVERLAP SECTION */}
-      <div className="relative max-w-6xl mx-auto px-6">
-
-        {/* Avatar + Hello */}
-        <div className="flex items-center gap-6 -mt-16">
-          {/* Avatar */}
-          <div className="w-28 h-28 rounded-full bg-blue-600 text-white flex items-center justify-center text-4xl font-bold shadow-xl border-4 border-white">
-            {user.username.charAt(0).toUpperCase()}
-          </div>
-
-          {/* Hello Text */}
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Hello, {user.username} 👋
-            </h1>
-            <p className="text-sm text-gray-500">{user.email}</p>
-          </div>
-        </div>
-
-        {/* 📍 DETAILS */}
-        <div className="mt-6 flex flex-wrap gap-8 items-center">
-          <p className="text-gray-600 flex items-center gap-1">
-            📍 Chennai, India
-          </p>
-
-          <div className="flex gap-10">
-            <div>
-              <p className="text-xl font-bold text-gray-900">18</p>
-              <p className="text-sm text-gray-500">Trips</p>
-            </div>
-
-            <div>
-              <p className="text-xl font-bold text-gray-900">7</p>
-              <p className="text-sm text-gray-500">Rewards</p>
-            </div>
-          </div>
-        </div>
-
-        {/* 📝 ABOUT YOU */}
-        <div className="mt-8 bg-white rounded-2xl shadow-md p-6 max-w-3xl">
-          <h2 className="text-lg font-semibold mb-2">About You</h2>
-          <p className="text-gray-600">
-            Passionate traveler who enjoys discovering hidden gems,
-            planning smart itineraries, and capturing memories 🌍✨
-          </p>
-        </div>
-
-        {/* 🔘 ACTIONS */}
-        <div className="mt-6 flex gap-4">
-          <button className="px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
-            Edit Profile
-          </button>
-
-          <button className="px-6 py-3 border border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition">
-            Change Password
-          </button>
-        </div>
+ function TravelDNA() {
+   return (
+     <div className="bg-white rounded-xl shadow p-6">
+       <h2 className="text-xl font-semibold mb-4">Your Travel DNA</h2>
+       <div className="space-y-3">
+         {travelDNA.map((item, index) => (
+           <div key={index}>
+             <div className="flex justify-between text-sm">
+               <span>{item.label}</span>
+               <span>{item.value}%</span>
+             </div>
+             <div className="w-full bg-gray-200 rounded-full h-2">
+               <div
+                className="bg-blue-500 h-2 rounded-full"
+                style={{ width: `${item.value}%` }}
+               />
+             </div>
+           </div>
+        ))}
       </div>
     </div>
   );
-};
+ }
 
-export default ProfilePage;
+ /* ------------------ Main Page ------------------ */
+ export default function ProfilePage() {
+   return (
+     <div className="min-h-screen bg-gray-100 p-6 space-y-6">
+     <ProfileHeader />
+     <TravelStats />
+     <div className="grid md:grid-cols-2 gap-6">
+        <TripTimeline />
+       <TravelDNA />
+       </div>
+    </div>
+ );
+}

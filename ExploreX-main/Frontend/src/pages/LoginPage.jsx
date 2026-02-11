@@ -34,7 +34,9 @@ const LoginPage = () => {
 
       if (res.data.user) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("userId", res.data.user.id);
       }
+
 
       setTimeout(() => {
         

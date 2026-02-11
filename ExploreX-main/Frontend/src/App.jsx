@@ -6,6 +6,13 @@ import ProfilePage from "./pages/ProfilePage";
 import ChatBot from "./components/ChatBot";
 import TripPlanPage from "./pages/TripPlanPage";
 import TripLoading from "./pages/TripLoading";
+import FavoritesPage from "./pages/FavoritesPage";
+import WhatsHot from "./pages/WhatsHot";
+import Settings from "./pages/Settings";
+
+
+
+
 
 function App() {
   return (
@@ -19,7 +26,10 @@ function App() {
         <Route path="/chatbot" element={<ChatBot/>}/>
         <Route path="/plan" element={<TripPlanPage/>}/>
         <Route path="/loading" element={<TripLoading/>}/>
-
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/trip-plan" element={<TripPlanPage />} />
+        <Route path="/whats-hot" element={<WhatsHot />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
   );
