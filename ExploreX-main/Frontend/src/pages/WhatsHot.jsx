@@ -291,17 +291,18 @@ const WhatsHot = () => {
 
   return (
     <div
-      className="relative min-h-screen w-full overflow-x-hidden"
-      style={{
-        backgroundImage: `url(${bgPattern})`,
-        backgroundRepeat: "repeat",
-        backgroundSize: "300px",
-      }}
-    >
+  className="relative min-h-screen w-full overflow-x-hidden bg-primary text-primary"
+  style={{
+    backgroundImage: `url(${bgPattern})`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "300px",
+  }}
+>
       {/* Back */}
       <button
         onClick={() => navigate("/home")}
-        className="ml-4 mt-4 px-5 py-2 bg-white rounded-full shadow hover:scale-105 transition"
+        className="ml-4 mt-4 px-5 py-2 theme-card rounded-full shadow hover:scale-105 transition"
+
       >
         ← Back
       </button>

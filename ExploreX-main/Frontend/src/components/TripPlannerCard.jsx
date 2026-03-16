@@ -336,7 +336,7 @@ import { useNavigate } from "react-router-dom";
 /* ✅ MOVE SECTION OUTSIDE */
 const Section = ({ title, children }) => (
   <div className="mt-10">
-    <h2 className="text-lg font-semibold text-black mb-4">{title}</h2>
+    <h2 className="text-lg font-semibold text-primary mb-4">{title}</h2>
     <div className="space-y-4">{children}</div>
   </div>
 );
@@ -415,12 +415,12 @@ const TripPlannerCard = () => {
   };
 
   return (
-    <div className="bg-[#F4FBFA] rounded-2xl shadow-xl p-8 w-full max-w-2xl mx-auto">
+    <div className="bg-card rounded-2xl shadow-xl p-8 w-full max-w-2xl mx-auto">
 
-      <h1 className="text-3xl font-bold text-center text-black">
+      <h1 className="text-3xl font-bold text-center text-primary">
         Plan Your Next Escape
       </h1>
-      <p className="text-center text-black opacity-70 mt-1">
+      <p className="text-center text-primary opacity-70 mt-1">
         Smart budgets. Better trips.
       </p>
 
@@ -431,7 +431,7 @@ const TripPlannerCard = () => {
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
             placeholder="Destination (Tokyo, Paris, Bali)"
-            className="w-full p-3 rounded-lg bg-[#EAF6F4] focus:ring-2 focus:ring-black outline-none"
+            className="w-full p-3 rounded-lg bg-card focus:ring-2 focus:ring-black outline-none"
           />
 
           <input
@@ -439,7 +439,7 @@ const TripPlannerCard = () => {
             min="1"
             value={days}
             onChange={(e) => setDays(Number(e.target.value))}
-            className="w-full p-3 rounded-lg bg-[#EAF6F4] focus:ring-2 focus:ring-black outline-none"
+            className="w-full p-3 rounded-lg bg-card focus:ring-2 focus:ring-black outline-none"
           />
         </div>
       </Section>
@@ -449,7 +449,7 @@ const TripPlannerCard = () => {
         <select
           value={groupSize}
           onChange={(e) => setGroupSize(e.target.value)}
-          className="w-full p-3 rounded-lg bg-[#EAF6F4] focus:ring-2 focus:ring-black outline-none"
+          className="w-full p-3 rounded-lg bg-card focus:ring-2 focus:ring-black outline-none"
         >
           <option>Solo</option>
           <option>Couple</option>
@@ -458,7 +458,7 @@ const TripPlannerCard = () => {
         </select>
 
         {(groupSize === "Family" || groupSize === "Friends") && (
-          <div className="bg-[#EAF6F4] rounded-xl p-4 flex justify-between items-center">
+          <div className="bg-card rounded-xl p-4 flex justify-between items-center">
             <span className="text-sm font-medium">Number of people</span>
 
             <div className="flex items-center gap-4">
@@ -490,7 +490,7 @@ const TripPlannerCard = () => {
 
       {/* BUDGET */}
       <Section title="💸 Budget Plan">
-        <div className="bg-[#EAF6F4] rounded-xl p-5">
+        <div className="bg-card rounded-xl p-5">
           <div className="flex justify-between mb-3 font-semibold">
             <span>₹{perDayBudget.toLocaleString()} / day</span>
             <span className="text-xs opacity-60">₹100 – ₹10,000</span>
@@ -507,7 +507,7 @@ const TripPlannerCard = () => {
           />
         </div>
 
-        <div className="bg-[#CDEDEC] rounded-xl p-4">
+        <div className="bg-card rounded-xl p-4">
           <p className="text-sm opacity-70">
             ₹{perDayBudget} × {days} days × {peopleCount} people
           </p>
@@ -524,7 +524,7 @@ const TripPlannerCard = () => {
           value={vibe}
           onChange={(e) => setVibe(e.target.value)}
           placeholder="Adventure, relaxed pace, foodie experiences…"
-          className="w-full p-4 rounded-xl bg-[#EAF6F4] focus:ring-2 focus:ring-black outline-none resize-none"
+          className="w-full p-4 rounded-xl bg-card focus:ring-2 focus:ring-black outline-none resize-none"
         />
       </Section>
 
@@ -538,7 +538,7 @@ const TripPlannerCard = () => {
           value={avoidList}
           onChange={(e) => setAvoidList(e.target.value)}
           placeholder="Crowds, nightlife, trekking…"
-          className="w-full p-3 rounded-lg bg-[#EAF6F4] focus:ring-2 focus:ring-black outline-none"
+          className="w-full p-3 rounded-lg bg-card focus:ring-2 focus:ring-black outline-none"
         />
       </Section>
 

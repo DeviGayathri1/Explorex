@@ -299,7 +299,9 @@ const FavoritePage = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
+    const user = JSON.parse(localStorage.getItem("user"));
+const userId = user?._id;
+
     if (!userId) return;
 
     getFavorites(userId).then(setFavorites);
@@ -312,7 +314,8 @@ const FavoritePage = () => {
 
   return (
     <div
-      className="relative min-h-screen px-1 sm:px-3 lg:px-1 py-3 bg-cover bg-center"
+      className="relative min-h-screen px-1 sm:px-3 lg:px-1 py-3 bg-primary text-primary bg-cover bg-center"
+
       style={{
         backgroundImage: `url(${bgPattern})`,
         backgroundRepeat: "repeat",
@@ -362,7 +365,8 @@ const FavoritePage = () => {
             return (
               <div
                 key={fav._id}
-                className="w-full p-3 rounded-lg bg-[#EAF6F4] hover:bg-[#DFF1EE] hover:ring-1 hover:ring-black/10 transition cursor-pointer hover:shadow-md"
+                className="w-full p-3 rounded-lg theme-card hover:ring-1 hover:ring-black/10 transition cursor-pointer hover:shadow-md"
+
                 onClick={() =>
                   navigate("/trip-plan", { state: { favorite: fav } })
                 }
@@ -396,7 +400,8 @@ const FavoritePage = () => {
                         e.stopPropagation();
                         navigate("/trip-plan", { state: { favorite: fav } });
                       }}
-                      className="bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 shadow-sm hover:shadow transition px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-sm sm:text-base"
+                      className="theme-card border shadow-sm hover:shadow transition px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-sm sm:text-base"
+
                     >
                       View Plan →
                     </button>

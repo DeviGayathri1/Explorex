@@ -50,7 +50,7 @@ const TravelBuzz = ({ items }) => {
             className="
               min-w-[420px]
               max-w-[420px]
-              bg-white/95 backdrop-blur
+              bg-gray-500/95 backdrop-blur
               rounded-2xl
               shadow-xl
               overflow-hidden

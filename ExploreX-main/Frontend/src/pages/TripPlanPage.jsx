@@ -256,7 +256,8 @@ const TripPlanPage = () => {
   const saveTripToFavorite = async () => {
     try {
       const payload = {
-        userId: localStorage.getItem("userId"),
+        userId: JSON.parse(localStorage.getItem("user"))?._id,
+
         type: "trip",
         data: {
           destination,

@@ -9,7 +9,8 @@ const HotCard = ({ item, subtitle, onClick }) => {
   return (
     <div
       onClick={() => onClick(item.destination)}
-      className="cursor-pointer bg-white rounded-2xl shadow hover:scale-105 transition overflow-hidden"
+      className="cursor-pointer theme-card rounded-2xl shadow hover:scale-105 transition overflow-hidden"
+
     >
       <img
         src={
@@ -24,7 +25,8 @@ const HotCard = ({ item, subtitle, onClick }) => {
         <h3 className="text-lg font-semibold">
           {item.destination}
         </h3>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm opacity-70">
+
           {subtitle || `${item.totalCount} recent interactions`}
         </p>
       </div>
