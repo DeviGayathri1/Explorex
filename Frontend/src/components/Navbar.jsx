@@ -16,6 +16,7 @@ const Navbar = ({ toggleSidebar }) => {
       setProfileLetter(user.username.charAt(0).toUpperCase());
     }
   }, []);
+  
 
   // 🔹 Close dropdown when clicking outside
   useEffect(() => {
@@ -35,7 +36,7 @@ const Navbar = ({ toggleSidebar }) => {
   };
 
   return (
-    <div className="flex items-center justify-between px-6 py-4 bg-white shadow-sm relative">
+    <div className="flex items-center justify-between px-6 py-4 bg-primary text-primary shadow-sm relative">
 
       {/* Sidebar toggle */}
       <button
@@ -46,7 +47,7 @@ const Navbar = ({ toggleSidebar }) => {
       </button>
 
       {/* Center: Search bar */}
-      <div className="hidden md:flex flex-1 justify-center px-6">
+      {/* <div className="hidden md:flex flex-1 justify-center px-6">
         <div className="w-full max-w-md relative">
           <input
             type="text"
@@ -57,7 +58,7 @@ const Navbar = ({ toggleSidebar }) => {
             🔍
           </span>
         </div>
-      </div>
+      </div> */}
 
       {/* Right section */}
       <div className="flex items-center gap-4 relative" ref={dropdownRef}>
@@ -76,7 +77,7 @@ const Navbar = ({ toggleSidebar }) => {
 
         {/* Dropdown */}
         {open && (
-          <div className="absolute right-0 top-12 w-44 bg-white rounded-lg shadow-lg border z-50">
+          <div className="absolute right-0 top-12 w-44 theme-card rounded-lg shadow-lg border z-50">
             <button
               onClick={() => {
                 setOpen(false);

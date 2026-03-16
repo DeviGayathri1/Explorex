@@ -16,36 +16,34 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      setError("Please fill all the fields.");
-      return;
+  if (!formData.email || !formData.password) {
+    setError("Please fill all the fields.");
+    return;
+  }
+
+  try {
+    const res = await API.post("/auth/login", formData);
+
+    if (res.data.user) {
+      // store user info for current session
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("userId", res.data.user._id);
+
+
+      setSuccess("Login Successful!");
+
+      // redirect to home or settings
+      setTimeout(() => navigate("/home"), 800);
+    } else {
+      setError(res.data.message || "Login failed");
     }
+  } catch (err) {
+    setError(err.response?.data?.message || "Server error");
+  }
+};
 
-    try {
-      const res = await API.post("/auth/login", formData);
-
-      setSuccess(res.data.message || "Login Successful!");
-
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-      }
-
-      if (res.data.user) {
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        localStorage.setItem("userId", res.data.user.id);
-      }
-
-
-      setTimeout(() => {
-        
-        navigate("/home");
-      }, 1000);
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-    }
-  };
 
   return (
     <div className="flex flex-col md:flex-row h-screen w-full font-sans">

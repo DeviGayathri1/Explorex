@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -49,4 +51,178 @@
 
 .recommended-scroll::-webkit-scrollbar-thumb:hover {
   background: #2563eb;
+}
+
+/* ===== Theme Classes for ExploreX (paste at the bottom of index.css) ===== */
+
+/* ===== Improved Theme Classes (Same Names) ===== */
+
+/* Classic Theme – Soft Blue Modern */
+:root {
+  --primary-bg: #ffffff;
+  --primary-text: #1f2937;
+  --accent: #2563eb;
+  --card-bg: rgba(255, 255, 255, 0.85);
+}
+.classic-theme {
+  --primary-bg: #FAD7DA;
+  --primary-text: #1e3a8a;
+  --accent: #2563eb;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* Sunset Theme – Warm & Vibrant */
+.sunset-theme {
+  --primary-bg: #fff4e6;
+  --primary-text: #7c2d12;
+  --accent: #ea580c;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* Midnight Theme – Premium Dark */
+/* Midnight Theme – Premium Dark */
+.midnight-theme {
+  --primary-bg: #0f172a;
+  --primary-text: #e2e8f0;
+  --accent: #22d3ee;
+  --card-bg: rgba(30, 41, 59, 0.85); /* FIXED DARK CARD */
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* Fix white text visibility in Midnight */
+.midnight-theme .text-white {
+  color: var(--primary-text) !important;
+}
+
+/* Fix white buttons in Midnight */
+.midnight-theme button,
+.midnight-theme .button-accent {
+  color: #ffffff !important;
+}
+
+/* Fix icons using text-white */
+.midnight-theme svg {
+  color: var(--primary-text) !important;
+}
+
+
+
+
+
+/* Minimal Theme – Elegant Soft Grey */
+.minimal-theme {
+  --primary-bg: #FFFFFF;
+  --primary-text: #1f2937;
+  --accent: #6366f1;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* ===== Helper Classes ===== */
+
+.bg-primary {
+  background-color: var(--primary-bg);
+}
+
+.text-primary {
+  color: var(--primary-text);
+}
+
+.bg-card {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(8px); /* Soft glass effect */
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.button-accent {
+  background-color: var(--accent);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+}
+
+.button-accent:hover {
+  opacity: 0.9;
+}
+
+/* Smooth Theme Transition */
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+/* ================= GLOBAL THEME FORCE ================= */
+
+/* Ensure theme applies everywhere */
+body {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* Override Tailwind hardcoded colors */
+.classic-theme .bg-white,
+.sunset-theme .bg-white,
+.minimal-theme .bg-white {
+  background-color: var(--card-bg) !important;
+}
+
+.midnight-theme .bg-white {
+  background-color: rgba(30, 41, 59, 0.85) !important;
+}
+
+/* Override text colors */
+.midnight-theme .text-gray-900,
+.midnight-theme .text-gray-800,
+.midnight-theme .text-gray-700,
+.midnight-theme .text-black {
+  color: var(--primary-text) !important;
+}
+
+/* Universal Theme Card */
+.theme-card {
+  background-color: var(--card-bg) !important;
+  color: var(--primary-text) !important;
+  backdrop-filter: blur(8px);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+/* ================= MIDNIGHT FULL FIX ================= */
+
+/* Fix ALL light backgrounds in midnight */
+.midnight-theme .bg-white,
+.midnight-theme .bg-gray-50,
+.midnight-theme .bg-gray-100,
+.midnight-theme .bg-gray-200,
+.midnight-theme .bg-slate-50,
+.midnight-theme .bg-slate-100,
+.midnight-theme .bg-slate-200 {
+  background-color: rgba(30, 41, 59, 0.85) !important;
+}
+
+/* Fix ALL dark text turning invisible */
+.midnight-theme .text-black,
+.midnight-theme .text-gray-900,
+.midnight-theme .text-gray-800,
+.midnight-theme .text-gray-700,
+.midnight-theme .text-gray-600 {
+  color: var(--primary-text) !important;
+}
+
+/* Fix borders */
+.midnight-theme .border,
+.midnight-theme .border-gray-200,
+.midnight-theme .border-gray-300 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure buttons are visible */
+.midnight-theme button {
+  color: var(--primary-text) !important;
 }

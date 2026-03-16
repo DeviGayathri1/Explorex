@@ -8,13 +8,32 @@ import TripPlanPage from "./pages/TripPlanPage";
 import TripLoading from "./pages/TripLoading";
 import FavoritesPage from "./pages/FavoritesPage";
 import WhatsHot from "./pages/WhatsHot";
-import Settings from "./pages/Settings";
-
+import SettingsPage from "./pages/SettingsPage";
+import { useEffect } from "react";
+import Tickets from "./pages/Tickets";
 
 
 
 
 function App() {
+  
+
+  useEffect(() => { /////new change////
+    const storedSettings = JSON.parse(localStorage.getItem("settings"));
+
+    if (storedSettings?.ThemePersonality) {
+      document.body.classList.remove(
+        "classic-theme",
+        "sunset-theme",
+        "midnight-theme",
+        "minimal-theme"
+      );
+
+      document.body.classList.add(
+        `${storedSettings.ThemePersonality}-theme`
+      );
+    }
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +48,8 @@ function App() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/trip-plan" element={<TripPlanPage />} />
         <Route path="/whats-hot" element={<WhatsHot />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/tickets" element={<Tickets />} />
       </Routes>
     </BrowserRouter>
   );

@@ -53,12 +53,13 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose, activeSection, setActiveSection }) => {
+
   return (
     <div
-      className={`fixed top-0 left-0 h-full bg-white shadow-lg transition-transform duration-300 z-50
-      ${isOpen ? "translate-x-0" : "-translate-x-full"} w-64`}
-    >
+  className={`fixed top-0 left-0 h-full bg-primary text-primary shadow-lg transition-transform duration-300 z-50
+  ${isOpen ? "translate-x-0" : "-translate-x-full"} w-64`}
+>
       {/* Header */}
       <div className="flex items-center justify-between p-6 border-b">
         <span className="font-bold text-2xl text-blue-600">
@@ -78,7 +79,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       </div>
 
       {/* Navigation */}
-      <nav className="flex flex-col gap-2 px-6 py-6 text-gray-700 font-medium">
+      <nav className="flex flex-col gap-2 px-6 py-6 text-primary font-medium">
         <Link
           to="/home"
           onClick={onClose}
@@ -102,6 +103,14 @@ const Sidebar = ({ isOpen, onClose }) => {
         >
           🔥 What’s Hot
         </Link>
+
+        <Link
+    to="/tickets"
+    onClick={onClose}
+    className="px-4 py-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
+  >
+    🎫 Tickets
+  </Link>
       </nav>
 
       {/* Settings at Bottom */}
@@ -109,7 +118,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         <Link
           to="/settings"
           onClick={onClose}
-          className="block px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition font-medium"
+          className="block px-4 py-3 rounded-lg text-primary hover:bg-gray-600/20 transition font-medium"
         >
           ⚙️ Settings
         </Link>

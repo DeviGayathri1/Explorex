@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import TripPlannerCard from "../components/TripPlannerCard";
@@ -7,12 +7,32 @@ import NearbyPlaces from "../components/NearbyPlaces";
 import ChatBot from "../components/ChatBot";
 import bgPattern from "../assets/travel-pattern.jpg";
 import sample from "../assets/sample.jpg"
+import { useEffect} from "react";
+import { useLocation } from "react-router-dom";
+
 
 const HomePage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [storedSettings, setStoredSettings] = useState(null);////new change///
+const location = useLocation();
+const [activeSection, setActiveSection] = useState("home");
+
+useEffect(() => {
+  if (location.state?.activeSection) {
+    setActiveSection(location.state.activeSection);
+  }
+}, [location]);
+
+
+
+useEffect(() => {
+  const settings = JSON.parse(localStorage.getItem("settings"));
+  setStoredSettings(settings);
+}, []);
 
   return (
-    <div className="min-h-screen relative text-black overflow-hidden">
+   <div className="min-h-screen relative bg-primary text-primary overflow-hidden">
+
 
       {/* BACKGROUND IMAGE */}
       <div
@@ -21,7 +41,7 @@ const HomePage = () => {
           backgroundImage: `url(${bgPattern})`,
           backgroundRepeat: "repeat",
           backgroundSize: "300px",
-          opacity: 0.3, 
+          opacity: 0.7, 
         }}
       />
 
@@ -35,7 +55,10 @@ const HomePage = () => {
         <Sidebar
   isOpen={sidebarOpen}
   onClose={() => setSidebarOpen(false)}
+  activeSection={activeSection}
+  setActiveSection={setActiveSection}
 />
+
 
         {/* Overlay */}
         {sidebarOpen && (
@@ -56,8 +79,9 @@ const HomePage = () => {
         />
 
         {/* Optional overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-20" />
-
+        {!document.body.classList.contains("midnight-theme") && (
+  <div className="absolute inset-0 bg-black bg-opacity-20" />
+)}
         {/* Optional text */}
         
       </div>
@@ -67,10 +91,19 @@ const HomePage = () => {
           <TripPlannerCard />
         </div>
 
-        {/* Sections */}
-        <RecommendedPlaces />
-        <NearbyPlaces />
-        <ChatBot />
+        {/* Sections */} 
+        {storedSettings?.AIrecommendations && (
+  <RecommendedPlaces />
+)}
+
+{storedSettings?.nearby && (
+  <NearbyPlaces />
+)}
+
+{storedSettings?.AIrecommendations && (
+  <ChatBot />
+)}
+
       </div>
     </div>
   );

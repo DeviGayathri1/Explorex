@@ -1,6 +1,16 @@
 import { useState } from "react";
+import { useEffect } from "react";
+
 
 const ChatBot = () => {
+  useEffect(() => {
+  const settings = JSON.parse(localStorage.getItem("settings"));
+
+  if (!settings?.activityTracking) {
+    console.log("Activity tracking disabled.");
+  }
+}, []);
+
   const [open, setOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
   const [input, setInput] = useState("");
